@@ -6,35 +6,18 @@ import http.client
 global condition
 global con_val
 condition = ['DISK', 'CPU', 'Memory']
-con_val = ['Too High', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%', 'Crashed']
+con_val = ['75%', '90%', '97%', 'Crashed']
 manager = ['New Relic', 'SOLMAN', 'Splunk']
 event_type = ['DATABASE', 'SYSTEM', 'JVM HEAP']
 vsad = ['DUM1', 'DUM2']
+source = ['5.16.242.87','5.16.42.92','5.14.242.87','5.14.42.92']
+severity = [1, 2, 3, 4, 5]
 
 class CustomAlerts:
     def __init__(self) -> None:
         pass
-
-    def populate_source(self):
-        source = []
-        i = j = k = l = None
-        for i in range(1,8,4):
-            for j in range(15,100,50):
-                for k in range(2,255,39):
-                    for l in range(2,255,3):
-                        ip = f"{i}.{j}.{k}.{l}"
-                        source.append(ip)
-        return source
     
-    def severityGen(self):
-        severity = []
-        for i in range (0,6):
-            severity.append(i)
-        return severity
-
     def __generate_alert(self):
-        source = self.populate_source()
-        severity = self.severityGen()
 
         a = random.choice(condition)
         b = random.choice(con_val)
@@ -77,6 +60,7 @@ class CustomAlerts:
             res = conn.getresponse()
             output = res.read().decode()
             print(output)
+            print(alert)
 
 
 alert = CustomAlerts()
